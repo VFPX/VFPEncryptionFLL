@@ -1,0 +1,6 @@
+AppName    = VFPEncryptionFLL
+AppID      = VFPEncryptionFLL
+Version    = 2026.10.30
+Component  = Yes
+ChangeLog  = ChangeLog.md
+Repository = https://github.com/VFPX/VFPEncryptionFLL

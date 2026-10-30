@@ -1,0 +1,39 @@
+lparameters toUpdateObject
+
+* Set the properties of the passed updater object.
+
+with toUpdateObject
+	.VersionNumber    = '2026.10.30 - 20261030'
+	.AvailableVersion = 'VFPEncryptionFLL-2026.10.30-update-20261030'
+	.Notes            = GetNotes()
+	.RegisterWithThor = GetRegisterWithThor()
+endwith
+return toUpdateObject
+
+* Get the notes for the project.
+
+procedure GetNotes
+local lcNotes
+text to lcNotes noshow
+# VFPXEncryptionFLL
+
+VFPXEncryptionFLL is a modern drop-in replacement for vfpencryption.fll.
+
+## Releases
+
+### 2026-10-30
+
+* Initial release.
+
+endtext
+return lcNotes
+
+* Register the tool with Thor. Note: Thor replaces ##InstallFolder## with the
+* installation path for the tool when this code is executed.
+
+procedure GetRegisterWithThor
+local lcCommand
+text to lcCommand noshow
+
+endtext
+return lcCommand
