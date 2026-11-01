@@ -42,7 +42,7 @@ Departures from vfpencryption.fll:
     
     and DECRYPT() will not strip the padding.
 
-* If you specify an encryption mode that needs an IV but do not provide it, the PRG's Encrypt() generates a GUID IV and prefixs it to the ciphertext. Decrypt() without IV will strip off the first block and use it as IV for the rest. Cryptographically the IV does not need to be secret, so this is safe.
+* If you specify an encryption mode that needs an IV but do not provide it, **the PRG's Encrypt() generates a GUID IV and prefixes it to the ciphertext**. Decrypt() without IV will strip off the first block and use it as IV for the rest. Cryptographically the IV does not need to be secret, so this is safe.
 
 Please note: if you are encrypting binary material, the FLL's nPaddingMode 0 (the default) and 1 were problematic, as binary plaintext could end with a chr(0) or space character so you can't safely rtrim. The same applies to this PRG. To be safe, ISO 10126 padding (mode 4) is properly implemented by this PRG and is the most random.
 
@@ -86,7 +86,7 @@ Parameters:
 
 * ~~nBlockSize: The block size the nEncryptionType should use.~~ Cannot be changed in AES, do not use.
 
-* cIV: The Initialization Vector (IV) that CBC, CFB, and OFB modes should use. This IV should be 16 bytes for AES. If you do not specify an IV for a mode that requires an IV, the PRG will generate a GUID IV and prefix it to the ciphertext. Cryptographically the IV does not need to be secret, so this is safe.
+* cIV: The Initialization Vector (IV) that CBC, CFB, and OFB modes should use. This IV should be 16 bytes for AES. **If you do not specify an IV for a mode that requires an IV, the PRG will generate a GUID IV and prefix it to the ciphertext.** Cryptographically the IV does not need to be secret, so this is safe.
 
 Return Value:
 
@@ -94,9 +94,7 @@ Character: the encrypted form of cStringtoEncrypt.
 
 Remarks:
 
-When saving the return value of Encrypt() to a field in a table, remember that Visual FoxPro will append blanks to the end of the string in order to fill the character field to its designated length. This can cause problems when decrypting the data as the spaces will be considered part of the encrypted string. As long as you have not changed #Define _STRIPPADDING .T. you can simply rtrim() before decrypting.
-
-To work around this, I suggest placing a single CHR(0) at the end of the encrypted string when saving it to the table. Then when decrypting the data just the portion prior to the CHR(0) can be sent into the Decrypt() function. This does not apply when using RC4 encryption (nEncryptionType = 1024). 
+When saving the return value of Encrypt() to a field in a table, remember that Visual FoxPro will append blanks to the end of the string in order to fill the character field to its designated length. This can cause problems when decrypting the data as the spaces will be considered part of the encrypted string. **If you have used nPaddingMode > 1, you can simply rtrim() before decrypting.** The original recommendation was: I suggest placing a single CHR(0) at the end of the encrypted string when saving it to the table. Then when decrypting the data just the portion prior to the CHR(0) can be sent into the Decrypt() function. This does not apply when using RC4 encryption (nEncryptionType = 1024). 
 
 ## Function DECRYPT()
 
@@ -137,7 +135,7 @@ Parameters:
 
 * ~~nBlockSize: The block size the nEncryptionType should use.~~ Cannot be changed in AES, do not use.
 
-* cIV: The Initialization Vector (IV) that CBC, CFB, and OFB modes should use. This IV should be 16 bytes for AES. If it is not provided for a mode that needs an IV, the first block is stripped off as the IV and used to decrypt the rest.
+* cIV: The Initialization Vector (IV) that CBC, CFB, and OFB modes should use. This IV should be 16 bytes for AES. **If it is not provided for a mode that needs an IV, the first block is stripped off as the IV and used to decrypt the rest.**
 
 Return Value:
 
@@ -189,7 +187,7 @@ Parameters:
 
 * ~~nBlockSize: The block size the nEncryptionType should use.~~ Cannot be changed in AES, do not use.
 
-* cIV: The Initialization Vector (IV) that CBC, CFB, and OFB modes should use. This IV should be 16 bytes for AES. If you do not specify an IV for a mode that requires an IV, the PRG will generate a GUID IV and prefix it to the ciphertext.
+* cIV: The Initialization Vector (IV) that CBC, CFB, and OFB modes should use. This IV should be 16 bytes for AES. **If you do not specify an IV for a mode that requires an IV, the PRG will generate a GUID IV and prefix it to the ciphertext.**
 
 Return Value:
 
@@ -237,7 +235,7 @@ Parameters:
 
 * ~~nBlockSize: The block size the nEncryptionType should use.~~ Cannot be changed in AES, do not use.
 
-* cIV: The Initialization Vector (IV) that CBC, CFB, and OFB modes should use. This IV should be 16 bytes for AES. If you do not specify an IV for a mode that requires an IV, the PRG will generate a GUID IV and prefix it to the ciphertext.
+* cIV: The Initialization Vector (IV) that CBC, CFB, and OFB modes should use. This IV should be 16 bytes for AES. **If it is not provided for a mode that needs an IV, the first block is stripped off as the IV and used to decrypt the rest.**
 
 Return Value:
 
