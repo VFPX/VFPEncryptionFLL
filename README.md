@@ -2,7 +2,7 @@
 
 [![ChangeLog](https://img.shields.io/github/last-commit/VFPX/VFPEncryptionFLL?path=ChangeLog.md&label=Latest%20Release)](ChangeLog.md)
 
-Project Manager: JackRhine
+Project Manager: John Ryan
 
 This code is intended as a drop-in replacement for the excellent vfpencryption.fll (and vfpencryption71.fll) that have been a wonderful resource. However, they are no longer supported by their author (Craig Boyd), they rely on obsolete VC++ libraries, and they are incompatible with x64 VFP development.
 
