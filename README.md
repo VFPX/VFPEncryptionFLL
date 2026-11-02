@@ -94,7 +94,8 @@ Character: the encrypted form of cStringtoEncrypt.
 
 Remarks:
 
-When saving the return value of Encrypt() to a field in a table, remember that Visual FoxPro will append blanks to the end of the string in order to fill the character field to its designated length. This can cause problems when decrypting the data as the spaces will be considered part of the encrypted string. **If you have used nPaddingMode > 1, you can simply rtrim() before decrypting.** The original recommendation was: I suggest placing a single CHR(0) at the end of the encrypted string when saving it to the table. Then when decrypting the data just the portion prior to the CHR(0) can be sent into the Decrypt() function. This does not apply when using RC4 encryption (nEncryptionType = 1024). 
+When saving the return value of Encrypt() to a field in a table, remember that Visual FoxPro will append blanks to the end of the string in order to fill the character field to its designated length. This can cause problems when decrypting the data as the spaces will be considered part of the encrypted string. **Craig Boyd suggested** placing a single CHR(0) at the end of the encrypted string when saving it to the table. Then when decrypting the data just the portion prior to the CHR(0) can be sent into the Decrypt() function. This does not apply when using RC4 encryption (nEncryptionType = 1024).
+**Or you can change character fields to Varchar (binary). Or you might be able to rely on known block length (16 bytes) to truncate to proper length.**
 
 ## Function DECRYPT()
 
