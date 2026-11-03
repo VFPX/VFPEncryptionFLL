@@ -1,6 +1,6 @@
-# VFPXEncryptionFLL
+# VFPEncryptionFLL
 
-VFPXEncryptionFLL is a modern drop-in replacement for vfpencryption.fll.
+VFPEncryptionFLL is a modern drop-in replacement for vfpencryption.fll.
 
 ## Releases
 
